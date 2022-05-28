@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Warcaby</title>
+        <script src="libs/three.js"></script>
+        <script src="libs/tween.umd.js"></script>
+        <script src="Game.js"></script>
+        <script src="Net.js"></script>
+        <script src="Ui.js"></script>
+        <script src="Main.js"></script>
+        <script src="Item.js"></script>
+        <script src="Pionek.js"></script>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            #head {
+                background-color: green;
+                width: 100%;
+                color: lightgreen;
+                height: 75px;
+                position: fixed;
+                top: 0;
+                z-index: 100;
+            }
+
+            #dialog::backdrop {
+                background-color: rgb(10 0 25 / 0.6);
+            }
+
+            #waiter::backdrop {
+                background-color: rgb(10 0 25 / 0.6);
+            }
+
+            #waiter {
+                background-color: green;
+                color: lightgreen;
+            }
+
+            #tab {
+                position: fixed;
+                background-color: green;
+                color: white;
+                bottom: 10px;
+                left: 10px;
+            }
+            #whenMove {
+                opacity: 0.75;
+            }
+        </style>
+    </head>
+
+    <body>
+        <dialog id="dialog" class="login_screen">
+            <h1 id="logger">Logowanie</h1>
+            <input type="text" id="input" />
+            <button id="login">Loguj</button>
+            <button id="reset">Reset</button>
+        </dialog>
+        <dialog id="waiter">
+            <h1>Czekam na drugiego gracza...</h1>
+        </dialog>
+        <dialog id="whenMove">
+            <h1>Czekam na ruch drugiego gracza...</h1>
+            <h2 id="timer"></h2>
+        </dialog>
+        <div id="head">
+            <div id="header">STATUS</div>
+            <!-- <button id="changer">Odznacz pionek</button> -->
+        </div>
+
+        <div id="root"></div>
+        <div id="tab"></div>
+    </body>
+</html>
