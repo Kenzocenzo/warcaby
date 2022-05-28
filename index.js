@@ -5,9 +5,6 @@ var path = require("path");
 const fs = require("fs");
 app.use(express.json());
 app.use(express.static("static")); // serwuje stronę index.html
-// const cors = require("cors");
-// app.use(cors());
-
 // przykładowy get obsługujący request ze strony
 
 let users = [];
