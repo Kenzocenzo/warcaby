@@ -1,28 +1,21 @@
 class Item extends THREE.Mesh {
-
-    constructor(x,a,b) {
-        super() // wywołanie konstruktora klasy z której dziedziczymy czyli z Mesha
+    constructor(x, a, b) {
+        super(); // wywołanie konstruktora klasy z której dziedziczymy czyli z Mesha
 
         if (x == 1) {
-            this.material = new THREE.MeshBasicMaterial({
-                color: 0x000000,
-                side: THREE.DoubleSide,
-                wireframe: false,
-                transparent: false,
-
-            });
-            this.name = "item_black"
+            this.texture = new THREE.TextureLoader().load("./textures/black2.jpg");
+            this.name = "item_black";
+        } else {
+            this.texture = new THREE.TextureLoader().load("./textures/white.jpg");
+            this.name = "item_white";
         }
-        else {
-            this.material = new THREE.MeshBasicMaterial({
-                color: 0xffffff,
-                side: THREE.DoubleSide,
-                wireframe: false,
-                transparent: false,
-
-            });
-            this.name = "item_white"
-        }
+        this.material = new THREE.MeshBasicMaterial({
+            side: THREE.DoubleSide,
+            wireframe: false,
+            transparent: false,
+            opacity: 1,
+            map: this.texture,
+        });
         this.positionx = a;
         this.positionz = b;
         this.geometry = new THREE.BoxGeometry(100, 30, 100);
@@ -34,7 +27,7 @@ class Item extends THREE.Mesh {
     }
     unpicked() {
         this.material.map = this.texture;
-        this.material.color.setHex(0x000000);
+        this.material.color.setHex(0xffffff);
         this.material.needsUpdate = true;
     }
 }
