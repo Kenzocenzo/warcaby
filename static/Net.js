@@ -50,6 +50,15 @@ class Net {
                 } // dane odpowiedzi z serwera
             );
     }
+    win() {
+        fetch("/WIN", {
+            method: "post",
+        }) // fetch
+            .then((response) => response.json())
+            .then(
+                (data) => {} // dane odpowiedzi z serwera
+            );
+    }
     reset() {
         fetch("/RESET", {
             method: "post",

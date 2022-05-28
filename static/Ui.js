@@ -102,21 +102,25 @@ class Ui {
         if (this.time == 0) {
             document.getElementById("timer").innerText = "Wygrałeś w grę";
             clearInterval(interval);
-        }
-        net.getBoard((data) => {
-            if (JSON.stringify(data.tab) != JSON.stringify(game.pionki)) {
-                game.pionki = data.tab;
-                clearInterval(interval);
-                this.createTab(game.pionki);
-                document.getElementById("whenMove").close();
-                game.isMoving = true;
-                game.movePionek(data.id, data.position);
+            net.win();
+        } else
+            net.getBoard((data) => {
+                if (data.lost == true) {
+                    clearInterval(interval);
+                    document.getElementById("timer").innerText = "Przegrałeś w grę, rych wykonany po czasie";
+                } else if (JSON.stringify(data.tab) != JSON.stringify(game.pionki)) {
+                    game.pionki = data.tab;
+                    clearInterval(interval);
+                    this.createTab(game.pionki);
+                    document.getElementById("whenMove").close();
+                    game.isMoving = true;
+                    game.movePionek(data.id, data.position);
 
-                if (data.zbijany != undefined) {
-                    game.zabij(data.zbijany.xc, data.zbijany.zc);
+                    if (data.zbijany != undefined) {
+                        game.zabij(data.zbijany.xc, data.zbijany.zc);
+                    }
                 }
-            }
-        });
+            });
 
         this.time--;
     }

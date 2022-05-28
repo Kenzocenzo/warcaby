@@ -1,6 +1,6 @@
 var express = require("express");
 var app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 var path = require("path");
 const fs = require("fs");
 app.use(express.json());
@@ -13,6 +13,7 @@ app.use(express.static("static")); // serwuje stronę index.html
 let users = [];
 let czyZbijany = false;
 let zbited = {};
+let czyPrzegral = false;
 let currentTab = [
     [0, 2, 0, 2, 0, 2, 0, 2],
     [2, 0, 2, 0, 2, 0, 2, 0],
@@ -46,6 +47,7 @@ app.post("/ADD_USER", (req, res) => {
 app.post("/RESET", (req, res) => {
     users = [];
     czyZbijany = false;
+    czyPrzegral = false;
     zbited = {};
     currentTab = [
         [0, 2, 0, 2, 0, 2, 0, 2],
@@ -63,6 +65,11 @@ app.post("/RESET", (req, res) => {
 });
 app.post("/CHECK", (req, res) => {
     res.json({ x: users.length });
+});
+app.post("/WIN", (req, res) => {
+    czyPrzegral = true;
+    console.log("przgerał, ale noob");
+    res.json({ x: req });
 });
 app.post("/MOVE", (req, res) => {
     let body = req.body;
@@ -90,10 +97,10 @@ app.post("/MOVE", (req, res) => {
 app.post("/GET_BOARD", (req, res) => {
     if (czyZbijany) {
         czyZbijany = false;
-        res.json({ tab: currentTab, id: id, position: position, zbijany: zbited });
+        res.json({ tab: currentTab, id: id, position: position, zbijany: zbited, lost: czyPrzegral });
         return 0;
     }
-    res.json({ tab: currentTab, id: id, position: position });
+    res.json({ tab: currentTab, id: id, position: position, lost: czyPrzegral });
 });
 
 app.listen(PORT, function () {

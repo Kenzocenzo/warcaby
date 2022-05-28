@@ -107,15 +107,15 @@ class Game {
                 }
             }
         }
-        // document.getElementById("changer").addEventListener("click", (e) => {
-        //     this.isPionek = true;
-        //     this.helpTab.forEach((el) => {
-        //         el.unpicked();
-        //     });
+        document.getElementById("changer").addEventListener("click", (e) => {
+            this.isPionek = true;
+            this.helpTab.forEach((el) => {
+                el.unpicked();
+            });
 
-        //     this.helpTab = [];
-        //     this.pioneczek.unpicked();
-        // });
+            this.helpTab = [];
+            this.pioneczek.unpicked();
+        });
         window.addEventListener("mousedown", (e) => {
             if (this.isMoving) {
                 this.mouseVector.x = (e.clientX / window.innerWidth) * 2 - 1;
